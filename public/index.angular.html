@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="ko" ng-app="albumApp">
+<head>
+    <title>Album - Motorgraph Console</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robot" content="noindex,nofallow">
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="icon" sizes="192x192" href="./images/logo.svg">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Motorgraph Console">
+    <link rel="apple-touch-icon-precomposed" href="./images/logo.svg">
+
+    <!-- Tile icon for Win8 (144x144 + tile color) -->
+    <!--<meta name="msapplication-TileImage" content="/images/logo.svg">
+    <meta name="msapplication-TileColor" content="#3372DF">-->
+
+    <link rel="shortcut icon" href="./images/logo.svg">
+
+    <!-- SEO: If your mobile URL is different from the desktop URL, add a canonical link to the desktop page https://developers.google.com/webmasters/smartphone-sites/feature-phones -->
+    <link rel="canonical" href="http://console.motorgraph.com/">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="./css/all.css">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body class="container-fluid">
+    <header>
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-navbar-collapse-1" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="/">MG Console</a>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <!--<li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>-->
+                        <li class="dropdown">
+                            <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">의견들 <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/comments" title="의견들 대시보드">의견들 대시보드</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">화보 <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/albums" title="화보관리 루트로 이동">화보관리 v2</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="/#album" title="화보관리 루트로 이동">화보관리 v1</a></li>
+                                <li><a ng-click="toggleUploadModal()" data-toggle="modal" title="사진들 업로드">업로드</a></li>
+                                <li><a ng-click="rescan()" title="재스캔">재스캔</a></li>
+                                <li><a ng-click="createDir()" data-toggle="modal" title="디렉토리 생성">디렉토리 생성</a></li>
+                                <li><a ng-click="setupAlbum()" title="현 디렉토리 화보 설정">화보설정</a></li>
+                                <li><a ng-click="createBanner()" title="현 디렉토리 기반 배너 생성">배너생성</a></li>
+                                <li><a ng-click="openResult()" title="현 폴더의 발행된 화보 열기">화보보기</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Youtube <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/youtube" title="Youtube 대시보드">유튜브 대시보드</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <!--<form class="navbar-form navbar-left" role="search">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Search">
+                        </div>
+                        <button type="submit" class="btn btn-default">Submit</button>
+                    </form>-->
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="/auth/logout" title="Logout">로그아웃</a></li>
+                        <li class="dropdown">
+                            <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" title="Help">도움말 <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#help/album">화보</a></li>
+                                <li><a href="#help/api">API</a></li>
+                                <!--<li><a href="#">Something else here</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="#">Separated link</a></li>-->
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <!-- /.navbar-collapse -->
+            </div>
+            <!-- /.container-fluid -->
+        </nav>
+
+        <ol class="breadcrumb">
+            <li ng-repeat="nav in breadcrumbs" ng-class="{ active: $last }"><a href="{{ nav.path }}">{{ nav.name }}</a></li>
+        </ol>
+    </header>
+
+    <div class="container">
+        <div ng-view class="row"></div>
+    </div>
+
+    <!-- Upload Form Dialog -->
+    <form id="uploadModal" name="uploadForm" ng-controller="UploadController as upCtrl" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>업로드
+                        <button type="button" class="close pull-right" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    </h3>
+                </div>
+                <div class="modal-body">
+                    <div class="bg-primary" ngf-select="" ngf-drop="" ng-model="files" ngf-drag-over-class="dragover" ngf-multiple="true" accept="image/*" ngf-pattern="'image/*'" ngf-max-size="100MB" ngf-max-total-size="1000MB">
+                        Select File, Drop File or Paste/Drop Image
+                    </div>
+                    <ul class="list-group">
+                        <li ng-repeat="f in files" class="list-group-item media">
+                            <div class="media-left media-top"><img ngf-thumbnail="f"></div>
+                            <div class="media-body form-inline">
+                                <button type="button" ng-click="upCtrl.removeFile($index)" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4>{{f.name}}</h4>
+                                <div class="alert alert-danger" role="alert" ng-show="f.$error">
+                                    <button type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    {{f.$error}} {{f.$errorParam}}
+                                </div>
+                                <div class="form-group">
+                                    <label for="file_title">제목</label>
+                                    <input type="text" name="file_title" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label for="file_description">설명</label>
+                                    <textarea name="file_description" class="form-control" cols="30" rows="2"></textarea>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="progress upload-modal__progress" ng-show="files.length">
+                        <div class="progress-bar" role="progressbar" aria-valuenow="{{ upCtrl.progress.percentage }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ upCtrl.progress.percentage }}%;">
+                            {{ upCtrl.progress.percentage }}% {{ upCtrl.progress.msg }}
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+                    <button type="button" class="btn btn-primary" ng-click="submit()" ng-show="files.length">저장</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </form><!-- /.modal -->
+    <!-- /Upload Form Dialog -->
+
+    <!-- Create Dir Dialog -->
+    <form id="dirModal" name="dirForm" role="dialog" class="modal fade" tabindex="-1"
+          ng-submit="formCtrl.createDirSubmit(dirForm.$valid)" ng-controller="FormController as formCtrl" novalidate>
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>디렉토리 생성
+                        <button type="button" class="close pull-right" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    </h3>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="dir_title">폴더명</label>
+                        <input type="text" name="dir_name" id="dir_name" class="form-control" placeholder="Directory name"
+                               ng-model="formCtrl.dir_name" required ng-pattern="/^\w+$/">
+                        <span class="help-block text-info">실제 생성할 폴더명. URL. 불허: 한글 and 공백 and 특수문자, 허용: 영숫자 and Underbar.</span>
+                        <div class="alert alert-warning" role="alert" ng-show="dirForm.dir_name.$dirty && dirForm.dir_name.$invalid">
+                            <small class="error" ng-show="dirForm.dir_name.$error.required && submitted">반드시 입력하셔야 합니다.</small>
+                            <small class="error" ng-show="dirForm.dir_name.$error.pattern">특수문자나 공백은 허용되지 않습니다.</small>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="dir_title">폴더 제목</label>
+                        <input type="text" name="dir_title" id="dir_title" class="form-control" placeholder="Directory title"
+                               ng-model="formCtrl.title" required ng-pattern="/^[^!”$%&’()*\+,\/;\[\\\]\^_`{|}~]+$/">
+                        <span class="help-block text-info">화면에 보여질 디렉토리명. 불허: 특수문자</span>
+                        <div class="alert alert-warning" role="alert" ng-show="dirForm.dir_title.$dirty && dirForm.dir_title.$invalid">
+                            <small class="error" ng-show="dirForm.dir_title.$error.required && submitted">반드시 입력하셔야 합니다.</small>
+                            <small class="error" ng-show="dirForm.dir_title.$error.pattern">특수문자는 허용되지 않습니다.</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+                    <button type="submit" class="btn btn-primary" ng-disabled="dirForm.$invalid">저장</button>
+                </div>
+            </div>
+        </div>
+    </form>
+    <!-- /Create Dir Dialog -->
+
+    <!-- Edit Dir Dialog -->
+    <form id="dirEditModal" name="dirEditForm" role="dialog" class="modal fade" tabindex="-1"
+          ng-submit="formCtrl.editDirSubmit(dirEditForm.$valid)" ng-controller="FormController as formCtrl" novalidate>
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>디렉토리 수정
+                        <button type="button" class="close pull-right" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    </h3>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="from_name">현재 폴더명</label>
+                        <input type="text" id="from_name" name="from_name" class="form-control" ng-model="formCtrl.from_name" readonly="readonly">
+                    </div>
+                    <div class="form-group">
+                        <label for="from_title">현재 폴더 제목</label>
+                        <input type="text" id="from_title" name="from_title" class="form-control" ng-model="formCtrl.from_title" readonly="readonly">
+                    </div>
+                    <div class="form-group">
+                        <label for="to_name">변경할 폴더명</label>
+                        <input type="text" id="to_name" name="to_name" class="form-control" placeholder="Directory name"
+                               ng-model="formCtrl.to_name" required ng-pattern="/^\w+$/">
+                        <span class="help-block text-info">실제 폴더명. URL. 불허: 한글 and 공백 and 특수문자, 허용: 영숫자 and Underbar.</span>
+                        <div class="alert alert-warning" role="alert" ng-show="dirEditForm.to_name.$dirty && dirEditForm.to_name.$invalid">
+                            <small class="error" ng-show="dirEditForm.to_name.$error.required && submitted">반드시 입력하셔야 합니다.</small>
+                            <small class="error" ng-show="dirEditForm.to_name.$error.pattern">특수문자는 허용되지 않습니다.</small>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="to_title">변경할 폴더 제목</label>
+                        <input type="text" id="to_title" name="to_title" class="form-control" placeholder="Directory title"
+                               ng-model="formCtrl.to_title" required ng-pattern="/^[^!”$%&’()*\+,\/;\[\\\]\^_`{|}~]+$/">
+                        <span class="help-block text-info">화면에 보여질 디렉토리명. 불허문자: 특수문자</span>
+                        <div class="alert alert-warning" role="alert" ng-show="dirEditForm.to_title.$dirty && dirEditForm.to_title.$invalid">
+                            <small class="error" ng-show="dirEditForm.to_title.$error.required && submitted">반드시 입력하셔야 합니다.</small>
+                            <small class="error" ng-show="dirEditForm.to_title.$error.pattern">특수문자는 허용되지 않습니다.</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+                    <button type="submit" class="btn btn-primary" ng-disabled="dirEditForm.$invalid">저장</button>
+                </div>
+            </div>
+        </div>
+    </form>
+    <!-- /Edit Dir Dialog -->
+
+    <!-- Album Dialog -->
+    <form id="albumModal" name="albumForm" role="dialog" class="modal fade" tabindex="-1"
+          ng-submit="formCtrl.setupAlbumSubmit(albumForm.$valid)" ng-controller="FormController as formCtrl" novalidate>
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>앨범 설정
+                        <button type="button" class="close pull-right" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    </h3>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="title">제목</label>
+                        <input type="text" id="title" name="title" class="form-control" ng-model="album.title" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="from_title">설명</label>
+                        <input type="text" id="description" name="description" class="form-control" ng-model="album.description">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+                    <button type="submit" class="btn btn-primary" ng-disabled="albumForm.$invalid">저장</button>
+                </div>
+            </div>
+        </div>
+    </form>
+    <!-- /Album Dialog -->
+
+    <!-- Banner Dialog -->
+    <div id="bannerModal" role="dialog" class="modal fade" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>배너
+                        <button type="button" class="close pull-right" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    </h3>
+                </div>
+                <div class="modal-body">
+                    <strong>Wysiwyg</strong>
+                    <p class="text-info">실선 내 컨텐츠를 드래그하고 클립보드에 복사 후 wysiwyg 에디터에 붙여넣으세요</p>
+
+                    <div class="preview">
+                        <a ng-href="{{ banner.href }}" target="_blank"><img alt="{{ banner.alt }}" ng-src="{{ banner.src }}" border="0"></a>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="banner_code">Embed Code</label>
+                        <textarea class="form-control banner-code" name="banner_code" id="banner_code" rows="5"><a href="{{ banner.href }}" target="_blank"><img alt="{{ banner.alt }}" src="{{ banner.src }}" border="0"></a></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /Banner Dialog -->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-route.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-resource.js"></script>
+    <script src="./js/all.js"></script>
+    <script src="./js/app.js"></script>
+</body>
+</html>

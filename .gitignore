@@ -1,0 +1,30 @@
+# IDE or Editor
+/.idea
+
+# Dependency
+/bower_components
+/node_modules
+/vendor
+
+# Laravel
+/.env
+/.env.production
+Homestead.yaml
+Homestead.json
+/bootstrap/compiled.php
+/_ide_helper.php
+.env.*.php
+.env.php
+.DS_Store
+Thumbs.db
+/storage/framework
+/storage/logs
+
+# Angular ignores
+angular/node_modules
+
+# Project
+composer.phar
+composer.lock
+/public/data
+/public/build

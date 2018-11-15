@@ -1,0 +1,28 @@
+<!-- dirs -->
+<div class="item col-sm-6 col-md-4" ng-repeat="dir in fsCtrl.datas.dirs">
+    <div class="thumbnail text-center">
+        <!--<img style="width: 100%; display: block;" src="https://album.motorgraph.local/{{ absoluteDir }}/{{ dir }}/folderthumb.jpg" alt="image"/>-->
+        <div class="thumbnail__icon"><span class="glyphicon glyphicon-folder-close"></span></div>
+        <p><a href="#album/{{ (fsCtrl.dir)? fsCtrl.dir +'.'+ dir.realname : dir.realname }}">{{ dir.title }} <span class="glyphicon glyphicon-link"></span></a></p>
+        <div class="caption">
+            <p>
+                <a href="" ng-click="fsCtrl.editDir($index)" class="btn btn-default">수정</a>
+                <a href="" ng-click="fsCtrl.delDir($index)" class="btn btn-default">삭제</a>
+                <a href="" class="btn btn-default" ng-show="fsCtrl.data.carousel">Embed</a>
+            </p>
+        </div>
+    </div>
+</div>
+<!-- files -->
+<div class="item col-sm-6 col-md-4" ng-repeat="file in fsCtrl.datas.files">
+    <div class="thumbnail text-center">
+        <img style="width: 100%; display: block;" ng-src="{{ file.thumburl }}" alt="image"/>
+        <p>{{ file.title }}</p>
+        <div class="caption">
+            <p>
+                <a href="" ng-click="fsCtrl.editFile($index)" class="btn btn-default">수정</a>
+                <a href="" ng-click="fsCtrl.delFile($index)" class="btn btn-default">삭제</a>
+            </p>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,29 @@
+{
+  "name": "Motorgraph Album",
+  "version": "0.0.1",
+  "authors": [
+    "모터그래프 개발01 <yj.kwak@motorgraph.com>"
+  ],
+  "description": "Motorgraph Album Web Application",
+  "main": "app.js",
+  "moduleType": [
+    "es6"
+  ],
+  "keywords": [
+    "motorgraph",
+    "album",
+    "photo"
+  ],
+  "license": "Apache",
+  "homepage": "www.motorgraph.com",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "ng-file-upload": "~9.0.9"
+  }
+}

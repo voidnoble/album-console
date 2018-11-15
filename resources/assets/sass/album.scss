@@ -1,0 +1,56 @@
+.thumbnail__icon {
+  margin-bottom: 1rem;
+  text-align: center;
+  color: gray;
+}
+
+.thumbnail__icon .glyphicon {
+  font-size: 15rem;
+}
+
+.item .thumbnail img {
+  max-width: 200px;
+  min-height: 150px;
+}
+
+#uploadModal .modal-body .bg-primary {
+  margin-bottom: 1.5rem;
+  padding: 15px;
+}
+
+#uploadModal .media img {
+  max-width: 150px;
+  max-height: 150px;
+}
+
+#bannerModal .preview {
+  padding: 2rem;
+  border: 3px dashed grey;
+}
+
+#bannerModal .preview img {
+  max-width: 100%;
+}
+
+#bannerModal .form-group {
+  margin-top: 2rem;
+}
+
+.col-thumbnail {
+  .insert-before, .insert-after {
+    display: block;
+    position: absolute;
+    top: 1%;
+    padding: 5px 2px;
+    width: 20px;
+    height: 90%;
+  }
+
+  .insert-before {
+    left: -5px;
+  }
+
+  .insert-after {
+    right: -5px;
+  }
+}
